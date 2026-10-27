@@ -17,6 +17,15 @@
 <body>
 
   <!-- ==========================================
+       TEXTURA CINEMATOGRÁFICA & CURSOR (HUXLEY SAGA)
+       ========================================== -->
+  <div class="film-grain-overlay" aria-hidden="true"></div>
+  <div id="custom-cursor-dot" class="custom-cursor-dot" aria-hidden="true"></div>
+  <div id="custom-cursor-ring" class="custom-cursor-ring" aria-hidden="true">
+    <span class="cursor-tag" id="cursor-tag">VER</span>
+  </div>
+
+  <!-- ==========================================
        HEADER & NAVEGAÇÃO FIXA (GLASSMORPHISM)
        ========================================== -->
   <header class="site-header" id="header">
@@ -31,17 +40,39 @@
         <ul class="nav-links">
           <li><a href="#hero" class="nav-link active">Início</a></li>
           <li><a href="#projetos" class="nav-link">Trabalhos</a></li>
+          <li><a href="#trajetoria" class="nav-link">Trajetória</a></li>
           <li><a href="#sobre" class="nav-link">O Estúdio</a></li>
           <li><a href="#servicos" class="nav-link">Serviços</a></li>
           <li><a href="#contato" class="nav-link">Contato</a></li>
         </ul>
       </nav>
 
-      <!-- Ações do Header: Toggle de Tema e Botão de Contato -->
+      <!-- Ações do Header (Mobbin Search + Huxley Audio + Theme Toggle) -->
       <div class="header-actions">
+        <!-- Spotlight / Command Palette Button (Estilo Mobbin) -->
+        <button id="search-trigger" class="header-util-btn search-trigger-btn" aria-label="Abrir busca global" title="Buscar no portfólio (⌘K / Ctrl+K)">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <span class="search-hint-text">Buscar</span>
+          <kbd class="kbd-badge">⌘K</kbd>
+        </button>
+
+        <!-- Botão de Áudio Imersivo Web Audio API (Estilo Huxley Saga) -->
+        <button id="audio-toggle" class="header-util-btn audio-toggle-btn" aria-label="Alternar áudio imersivo" title="Áudio imersivo e cliques sutis">
+          <div class="audio-wave-icon" aria-hidden="true">
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+            <span class="wave-bar"></span>
+          </div>
+          <span id="audio-status-label" class="audio-label">SOM: OFF</span>
+        </button>
+
         <!-- Botão Alternador Modo Claro / Escuro -->
         <button id="theme-toggle" class="theme-toggle-btn" aria-label="Alternar tema claro e escuro" title="Alternar tema">
-          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
             <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -52,7 +83,7 @@
             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
           </svg>
-          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </button>
@@ -75,6 +106,7 @@
         <ul class="mobile-nav-links">
           <li><a href="#hero" class="mobile-link">Início</a></li>
           <li><a href="#projetos" class="mobile-link">Trabalhos</a></li>
+          <li><a href="#trajetoria" class="mobile-link">Trajetória</a></li>
           <li><a href="#sobre" class="mobile-link">O Estúdio</a></li>
           <li><a href="#servicos" class="mobile-link">Serviços</a></li>
           <li><a href="#contato" class="mobile-link">Contato</a></li>
@@ -91,6 +123,7 @@
          SEÇÃO HERO / PÁGINA INICIAL (JON ESTÚDIO)
          ========================================== -->
     <section class="hero-section" id="hero">
+      <div class="hero-ambient-glow" aria-hidden="true"></div>
       <div class="hero-container">
         
         <!-- Status Badge -->
@@ -118,8 +151,8 @@
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
           </a>
-          <a href="#sobre" class="btn btn-secondary btn-lg">
-            Sobre o Jon & Metodologia
+          <a href="#trajetoria" class="btn btn-secondary btn-lg">
+            Explorar Trajetória & Universo
           </a>
         </div>
 
@@ -180,26 +213,71 @@
     </div>
 
     <!-- ==========================================
-         SEÇÃO TRABALHOS SELECIONADOS
+         SEÇÃO TRABALHOS SELECIONADOS (ALICIA DUBUIS + MOBBIN)
          ========================================== -->
     <section class="projects-section" id="projetos">
       <div class="section-container">
         
         <div class="section-header reveal-item">
-          <div class="section-label">Portfólio em Destaque</div>
+          <div class="section-header-top">
+            <div class="section-label">Portfólio em Destaque</div>
+            <div class="curation-hint-pill">
+              <span class="dot-curate"></span>
+              <span>Dica: Use <strong>(+)</strong> para montar seu deck personalizado</span>
+            </div>
+          </div>
           <h2 class="section-title">Trabalhos autorais que rompem o padrão</h2>
           <p class="section-subtitle">Casos reais onde estratégia afiada, estética marcante e design funcional se encontram para impulsionar marcas líderes.</p>
         </div>
 
-        <!-- Filtros de Categoria -->
-        <div class="project-filters reveal-item">
-          <button class="filter-btn active" data-filter="all">Todos os Projetos</button>
-          <button class="filter-btn" data-filter="branding">Branding & Naming</button>
-          <button class="filter-btn" data-filter="digital">UI/UX & Web Experience</button>
-          <button class="filter-btn" data-filter="packaging">Packaging & Editorial</button>
+        <!-- Barra de Controle: Filtros Dinâmicos (Mobbin) + Alternador de Visualização (Alicia Dubuis) -->
+        <div class="gallery-controls-bar reveal-item">
+          <!-- Filtros de Categoria com Contadores (Mobbin) -->
+          <div class="project-filters" id="project-filters">
+            <button class="filter-btn active" data-filter="all">
+              <span>Todos</span>
+              <span class="filter-count" id="count-all">6</span>
+            </button>
+            <button class="filter-btn" data-filter="branding">
+              <span>Branding & Naming</span>
+              <span class="filter-count" id="count-branding">4</span>
+            </button>
+            <button class="filter-btn" data-filter="digital">
+              <span>UI/UX & Web</span>
+              <span class="filter-count" id="count-digital">3</span>
+            </button>
+            <button class="filter-btn" data-filter="packaging">
+              <span>Packaging & Editorial</span>
+              <span class="filter-count" id="count-packaging">3</span>
+            </button>
+          </div>
+
+          <!-- Alternador de Visualização: Grade vs. Arquivo/Índice (Alicia Dubuis) -->
+          <div class="view-mode-toggle" aria-label="Modo de visualização da galeria">
+            <button id="view-grid-btn" class="view-btn active" title="Visualização em Grade de Cartões" aria-label="Visualização em grade">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+              <span>Grade</span>
+            </button>
+            <button id="view-archive-btn" class="view-btn" title="Visualização em Arquivo / Índice Editorial" aria-label="Visualização em lista de arquivo">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="8" y1="6" x2="21" y2="6"></line>
+                <line x1="8" y1="12" x2="21" y2="12"></line>
+                <line x1="8" y1="18" x2="21" y2="18"></line>
+                <line x1="3" y1="6" x2="3.01" y2="6"></line>
+                <line x1="3" y1="12" x2="3.01" y2="12"></line>
+                <line x1="3" y1="18" x2="3.01" y2="18"></line>
+              </svg>
+              <span>Arquivo / Índice</span>
+            </button>
+          </div>
         </div>
 
-        <!-- Grade de Projetos do Jon Estúdio -->
+        <!-- 1. GRADE DE PROJETOS (MODO VISUAL) -->
         <div class="projects-grid" id="projects-grid">
           
           <!-- Projeto 1: Vortex Electronic Festival -->
@@ -210,8 +288,12 @@
                    class="project-thumb" 
                    loading="lazy">
               <div class="project-overlay">
-                <span class="overlay-cta">Explorar Projeto</span>
+                <span class="overlay-cta">Explorar Case</span>
               </div>
+              <!-- Botão Colecionar para o Deck (Alicia Dubuis style) -->
+              <button class="collect-btn" data-id="1" aria-label="Adicionar Vortex Festival ao deck" title="Adicionar projeto ao seu deck de seleção">
+                <span class="plus-icon">+</span>
+              </button>
             </div>
             <div class="project-info">
               <div class="project-meta">
@@ -231,8 +313,11 @@
                    class="project-thumb" 
                    loading="lazy">
               <div class="project-overlay">
-                <span class="overlay-cta">Explorar Projeto</span>
+                <span class="overlay-cta">Explorar Case</span>
               </div>
+              <button class="collect-btn" data-id="2" aria-label="Adicionar Aura Bio Skincare ao deck" title="Adicionar projeto ao seu deck de seleção">
+                <span class="plus-icon">+</span>
+              </button>
             </div>
             <div class="project-info">
               <div class="project-meta">
@@ -252,8 +337,11 @@
                    class="project-thumb" 
                    loading="lazy">
               <div class="project-overlay">
-                <span class="overlay-cta">Explorar Projeto</span>
+                <span class="overlay-cta">Explorar Case</span>
               </div>
+              <button class="collect-btn" data-id="3" aria-label="Adicionar Nexus FinTech ao deck" title="Adicionar projeto ao seu deck de seleção">
+                <span class="plus-icon">+</span>
+              </button>
             </div>
             <div class="project-info">
               <div class="project-meta">
@@ -265,7 +353,7 @@
             </div>
           </article>
 
-          <!-- Projeto 4: Monolith Architecture Magazine -->
+          <!-- Projeto 4: Monolith Architecture Book -->
           <article class="project-card reveal-item" data-category="packaging" data-id="4">
             <div class="project-thumb-wrapper">
               <img src="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=900&auto=format&fit=crop" 
@@ -273,8 +361,11 @@
                    class="project-thumb" 
                    loading="lazy">
               <div class="project-overlay">
-                <span class="overlay-cta">Explorar Projeto</span>
+                <span class="overlay-cta">Explorar Case</span>
               </div>
+              <button class="collect-btn" data-id="4" aria-label="Adicionar Monolith Architecture ao deck" title="Adicionar projeto ao seu deck de seleção">
+                <span class="plus-icon">+</span>
+              </button>
             </div>
             <div class="project-info">
               <div class="project-meta">
@@ -294,8 +385,11 @@
                    class="project-thumb" 
                    loading="lazy">
               <div class="project-overlay">
-                <span class="overlay-cta">Explorar Projeto</span>
+                <span class="overlay-cta">Explorar Case</span>
               </div>
+              <button class="collect-btn" data-id="5" aria-label="Adicionar Kroma Sneakerlab ao deck" title="Adicionar projeto ao seu deck de seleção">
+                <span class="plus-icon">+</span>
+              </button>
             </div>
             <div class="project-info">
               <div class="project-meta">
@@ -315,8 +409,11 @@
                    class="project-thumb" 
                    loading="lazy">
               <div class="project-overlay">
-                <span class="overlay-cta">Explorar Projeto</span>
+                <span class="overlay-cta">Explorar Case</span>
               </div>
+              <button class="collect-btn" data-id="6" aria-label="Adicionar Zenith Hi-Fi ao deck" title="Adicionar projeto ao seu deck de seleção">
+                <span class="plus-icon">+</span>
+              </button>
             </div>
             <div class="project-info">
               <div class="project-meta">
@@ -329,6 +426,217 @@
           </article>
 
         </div>
+
+        <!-- 2. TABELA DE ARQUIVO / ÍNDICE EDITORIAL (ALICIA DUBUIS STYLE) -->
+        <div class="projects-archive-view" id="projects-archive" style="display: none;">
+          <div class="archive-table-header">
+            <span class="col-year">Ano</span>
+            <span class="col-title">Projeto & Conceito</span>
+            <span class="col-discipline">Disciplina / Escopo</span>
+            <span class="col-client">Cliente</span>
+            <span class="col-action">Ações</span>
+          </div>
+
+          <div class="archive-list" id="archive-list">
+            <!-- Linha 1 -->
+            <div class="archive-row" data-id="1" data-category="branding digital" data-image="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=900&auto=format&fit=crop">
+              <span class="archive-year">2026</span>
+              <div class="archive-main">
+                <h4 class="archive-title">Vortex Electronic Festival</h4>
+                <span class="archive-scope-mobile">Identidade Cinética & Web</span>
+              </div>
+              <span class="archive-discipline">Identidade Cinética, Pôsteres, Web 3D</span>
+              <span class="archive-client">Vortex Music Global</span>
+              <div class="archive-actions">
+                <button class="archive-inspect-btn" data-id="1" title="Visualizar case completo">Ver Case</button>
+                <button class="collect-btn-sm" data-id="1" title="Adicionar ao deck">+</button>
+              </div>
+            </div>
+
+            <!-- Linha 2 -->
+            <div class="archive-row" data-id="2" data-category="branding packaging" data-image="https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=900&auto=format&fit=crop">
+              <span class="archive-year">2026</span>
+              <div class="archive-main">
+                <h4 class="archive-title">Aura Bio Skincare</h4>
+                <span class="archive-scope-mobile">Branding & Packaging</span>
+              </div>
+              <span class="archive-discipline">Branding, Packaging Ecológico, Guidelines</span>
+              <span class="archive-client">Aura Biocosméticos</span>
+              <div class="archive-actions">
+                <button class="archive-inspect-btn" data-id="2" title="Visualizar case completo">Ver Case</button>
+                <button class="collect-btn-sm" data-id="2" title="Adicionar ao deck">+</button>
+              </div>
+            </div>
+
+            <!-- Linha 3 -->
+            <div class="archive-row" data-id="3" data-category="digital" data-image="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=900&auto=format&fit=crop">
+              <span class="archive-year">2025</span>
+              <div class="archive-main">
+                <h4 class="archive-title">Nexus FinTech Platform</h4>
+                <span class="archive-scope-mobile">Design System & UI/UX</span>
+              </div>
+              <span class="archive-discipline">Design System, UX Research, Web & Mobile App</span>
+              <span class="archive-client">Nexus Capital Tech</span>
+              <div class="archive-actions">
+                <button class="archive-inspect-btn" data-id="3" title="Visualizar case completo">Ver Case</button>
+                <button class="collect-btn-sm" data-id="3" title="Adicionar ao deck">+</button>
+              </div>
+            </div>
+
+            <!-- Linha 4 -->
+            <div class="archive-row" data-id="4" data-category="packaging" data-image="https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?q=80&w=900&auto=format&fit=crop">
+              <span class="archive-year">2026</span>
+              <div class="archive-main">
+                <h4 class="archive-title">Monolith Architecture Book</h4>
+                <span class="archive-scope-mobile">Design Editorial & Livro</span>
+              </div>
+              <span class="archive-discipline">Design Editorial, Direção Fotográfica, Gráfica</span>
+              <span class="archive-client">Monolith Press & Architecture</span>
+              <div class="archive-actions">
+                <button class="archive-inspect-btn" data-id="4" title="Visualizar case completo">Ver Case</button>
+                <button class="collect-btn-sm" data-id="4" title="Adicionar ao deck">+</button>
+              </div>
+            </div>
+
+            <!-- Linha 5 -->
+            <div class="archive-row" data-id="5" data-category="branding digital" data-image="https://images.unsplash.com/photo-1552346154-21d32810aba3?q=80&w=900&auto=format&fit=crop">
+              <span class="archive-year">2025</span>
+              <div class="archive-main">
+                <h4 class="archive-title">Kroma Sneakerlab Concept</h4>
+                <span class="archive-scope-mobile">Direção de Arte & 3D</span>
+              </div>
+              <span class="archive-discipline">Direção de Arte, Web Design 3D, Campanha Digital</span>
+              <span class="archive-client">Kroma Footwear Ltd.</span>
+              <div class="archive-actions">
+                <button class="archive-inspect-btn" data-id="5" title="Visualizar case completo">Ver Case</button>
+                <button class="collect-btn-sm" data-id="5" title="Adicionar ao deck">+</button>
+              </div>
+            </div>
+
+            <!-- Linha 6 -->
+            <div class="archive-row" data-id="6" data-category="branding packaging" data-image="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=900&auto=format&fit=crop">
+              <span class="archive-year">2026</span>
+              <div class="archive-main">
+                <h4 class="archive-title">Zenith Hi-Fi Acoustics</h4>
+                <span class="archive-scope-mobile">Packaging & Brand</span>
+              </div>
+              <span class="archive-discipline">Branding, Packaging de Luxo, Sinalização</span>
+              <span class="archive-client">Zenith Audio Labs</span>
+              <div class="archive-actions">
+                <button class="archive-inspect-btn" data-id="6" title="Visualizar case completo">Ver Case</button>
+                <button class="collect-btn-sm" data-id="6" title="Adicionar ao deck">+</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hover Preview Flutuante (Alicia Dubuis Style) -->
+          <div id="archive-preview-card" class="archive-preview-card" aria-hidden="true">
+            <img id="archive-preview-img" src="" alt="Preview do projeto">
+            <div class="archive-preview-caption" id="archive-preview-caption"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================
+         SEÇÃO TRAJETÓRIA AUTORAL & CAPÍTULOS (HUXLEY SAGA)
+         ========================================== -->
+    <section class="timeline-section" id="trajetoria">
+      <div class="section-container">
+        
+        <div class="section-header reveal-item">
+          <div class="section-label">A Jornada do Estúdio</div>
+          <h2 class="section-title">A Trajetória JON // Linha do Tempo Autoral</h2>
+          <p class="section-subtitle">Uma narrativa construída através de desafios complexos, explorações visuais radicais e evolução técnica constante.</p>
+        </div>
+
+        <div class="timeline-container">
+          <!-- Linha Central Guia -->
+          <div class="timeline-spine" aria-hidden="true"></div>
+
+          <!-- Capítulo 01 -->
+          <div class="timeline-chapter reveal-item" data-chapter="01">
+            <div class="chapter-marker">
+              <span class="chapter-num">01</span>
+              <span class="chapter-dot"></span>
+            </div>
+            <div class="chapter-card">
+              <div class="chapter-header">
+                <span class="chapter-epoch">2020 — 2021</span>
+                <span class="chapter-status">A Gênese</span>
+              </div>
+              <h3 class="chapter-title">Fundação & A Busca pela Tipografia Monumental</h3>
+              <p class="chapter-desc">O diretor criativo Jon funda o estúdio independente com um manifesto claro: repudiar soluções genéricas de templates. Primeiros projetos com identidades brutalistas, pôsteres serigráficos e experimentações de contraste extremo.</p>
+              <div class="chapter-meta">
+                <span class="chapter-tag">Manifesto Visual</span>
+                <span class="chapter-tag">Brutalismo Gráfico</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Capítulo 02 -->
+          <div class="timeline-chapter reveal-item" data-chapter="02">
+            <div class="chapter-marker">
+              <span class="chapter-num">02</span>
+              <span class="chapter-dot"></span>
+            </div>
+            <div class="chapter-card">
+              <div class="chapter-header">
+                <span class="chapter-epoch">2022 — 2023</span>
+                <span class="chapter-status">Expansão Digital</span>
+              </div>
+              <h3 class="chapter-title">Sistemas Digitais Escaláveis & Clientes Globais</h3>
+              <p class="chapter-desc">Expansão para plataformas de alta tecnologia. Criação de Design Systems robustos para FinTechs, experiências 3D interativas para streetwear e plataformas de festivais atendendo mais de 100 mil usuários simultâneos.</p>
+              <div class="chapter-meta">
+                <span class="chapter-tag">UI/UX Avançado</span>
+                <span class="chapter-tag">Design Systems</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Capítulo 03 -->
+          <div class="timeline-chapter reveal-item" data-chapter="03">
+            <div class="chapter-marker">
+              <span class="chapter-num">03</span>
+              <span class="chapter-dot"></span>
+            </div>
+            <div class="chapter-card">
+              <div class="chapter-header">
+                <span class="chapter-epoch">2024 — 2025</span>
+                <span class="chapter-status">Reconhecimento</span>
+              </div>
+              <h3 class="chapter-title">Honrarias Awwwards, Bienal & Publicações Físicas</h3>
+              <p class="chapter-desc">Destaque internacional com Menção Honrosa no Awwwards e inclusão de publicações editoriais na Bienal Internacional de Design. O estúdio consolida sua assinatura: equilíbrio perfeito entre o tátil e o digital.</p>
+              <div class="chapter-meta">
+                <span class="chapter-tag">Awwwards Honorable Mention</span>
+                <span class="chapter-tag">Design Editorial Monolítico</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Capítulo 04 -->
+          <div class="timeline-chapter reveal-item" data-chapter="04">
+            <div class="chapter-marker">
+              <span class="chapter-num">04</span>
+              <span class="chapter-dot"></span>
+            </div>
+            <div class="chapter-card highlight-chapter">
+              <div class="chapter-header">
+                <span class="chapter-epoch">2026 — Presente</span>
+                <span class="chapter-status pulse-status">Fase Atual</span>
+              </div>
+              <h3 class="chapter-title">JON Estúdio 2.0 // Experiências Imersivas de Luxo</h3>
+              <p class="chapter-desc">Refinamento da direção criativa com atendimento exclusivo e seletivo. Foco em marcas de alto valor agregado, lançamentos cinematográficos, produtos que estabelecem liderança de categoria e direção de arte completa.</p>
+              <div class="chapter-meta">
+                <span class="chapter-tag tag-accent">Direção Criativa Global</span>
+                <span class="chapter-tag tag-accent">Atendimento Seletivo</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </section>
 
@@ -362,7 +670,7 @@
             <h2 class="about-title">Nascido para criar marcas que lideram sua própria categoria.</h2>
             
             <p class="about-text">
-              Comandado por <strong>Jon</strong>, o estúdio combina a sensibilidade visual do design europeu com o dinamismo e a tecnologia do ecossistema digital contemporâneo.
+              Comandado por <strong>Jon</strong>, o estúdio combina a sensibilidade visual do design editorial contemporâneo com o dinamismo e a tecnologia do ecossistema digital de ponta.
             </p>
             <p class="about-text">
               Trabalhamos de forma próxima e seletiva: assumimos poucos projetos por vez para garantir que cada detalhe — da curva de uma letra à transição de uma interface — receba dedicação artesanal e estratégica.
@@ -519,10 +827,10 @@
             </div>
 
             <div class="social-links">
+              <a href="https://aliciadubuis.com/?ref=siteinspire" target="_blank" rel="noopener noreferrer" class="social-pill">SiteInspire</a>
+              <a href="https://mobbin.com" target="_blank" rel="noopener noreferrer" class="social-pill">Mobbin</a>
+              <a href="https://www.huxleysaga.com" target="_blank" rel="noopener noreferrer" class="social-pill">Huxley Saga</a>
               <a href="https://www.awwwards.com" target="_blank" rel="noopener noreferrer" class="social-pill">Awwwards</a>
-              <a href="https://www.siteinspire.com" target="_blank" rel="noopener noreferrer" class="social-pill">SiteInspire</a>
-              <a href="https://behance.net" target="_blank" rel="noopener noreferrer" class="social-pill">Behance</a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-pill">Instagram</a>
             </div>
           </div>
 
@@ -530,6 +838,15 @@
           <div class="contact-form-col">
             <form id="contact-form" class="custom-form" novalidate>
               
+              <!-- Aviso de Seleção do Deck (injetado via Alicia Dubuis curation) -->
+              <div id="deck-curation-notice" class="deck-curation-notice" style="display: none;">
+                <div class="curation-notice-header">
+                  <span class="curation-dot"></span>
+                  <span class="curation-text">Projetos do seu deck vinculados a esta proposta:</span>
+                </div>
+                <div id="deck-curation-tags" class="deck-curation-tags"></div>
+              </div>
+
               <!-- Campo Nome -->
               <div class="form-group">
                 <label for="user-name" class="form-label">Seu Nome / Empresa <span class="required">*</span></label>
@@ -559,7 +876,7 @@
               <!-- Campo Mensagem -->
               <div class="form-group">
                 <label for="user-message" class="form-label">Fale sobre seu projeto e expectativas <span class="required">*</span></label>
-                <textarea id="user-message" name="message" class="form-textarea" rows="4" placeholder="Conte-nos sobre os desafios, metas, público-alvo ou prazo estimado..." required minlength="10"></textarea>
+                <textarea id="user-message" name="message" class="form-textarea" rows="4" placeholder="Conte-nos sobre os desafios, metas, referências ou prazo estimado..." required minlength="10"></textarea>
                 <div class="form-help-row">
                   <span class="error-msg" id="error-message">Descreva sua mensagem com pelo menos 10 caracteres.</span>
                   <span class="char-counter" id="char-counter">0 / 500</span>
@@ -602,15 +919,17 @@
             <span class="footer-col-title">Seções</span>
             <a href="#hero">Início</a>
             <a href="#projetos">Trabalhos</a>
+            <a href="#trajetoria">Trajetória</a>
             <a href="#sobre">O Estúdio</a>
             <a href="#servicos">Serviços</a>
             <a href="#contato">Fale Conosco</a>
           </div>
           <div class="footer-nav-col">
-            <span class="footer-col-title">Inspirações</span>
+            <span class="footer-col-title">Inspirações de Design</span>
+            <a href="https://aliciadubuis.com/?ref=siteinspire" target="_blank" rel="noopener">Alicia Dubuis (SiteInspire)</a>
+            <a href="https://mobbin.com" target="_blank" rel="noopener">Mobbin (UI Patterns)</a>
+            <a href="https://www.huxleysaga.com" target="_blank" rel="noopener">Huxley Saga (Studio Freight)</a>
             <a href="https://www.awwwards.com" target="_blank" rel="noopener">Awwwards</a>
-            <a href="https://www.siteinspire.com" target="_blank" rel="noopener">SiteInspire</a>
-            <a href="https://mobbin.com" target="_blank" rel="noopener">Mobbin</a>
           </div>
         </div>
       </div>
@@ -628,19 +947,99 @@
   </footer>
 
   <!-- ==========================================
-       MODAL DE DETALHES DO PROJETO
+       BANDEJA FLUTUANTE DE CURADORIA (ALICIA DUBUIS STYLE)
+       ========================================== -->
+  <aside id="selection-dock" class="selection-dock" aria-label="Bandeja de projetos selecionados">
+    <div class="selection-dock-inner">
+      <div class="dock-summary">
+        <span class="dock-badge-pulse"></span>
+        <span class="dock-title">Deck Autoral:</span>
+        <span class="dock-count-wrap"><strong id="selection-count">0</strong> projeto(s)</span>
+      </div>
+      <div class="dock-items" id="dock-items-preview"></div>
+      <div class="dock-actions">
+        <button id="dock-submit-btn" class="btn btn-sm btn-primary">
+          <span>Solicitar Proposta com Seleção</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </button>
+        <button id="dock-clear-btn" class="btn btn-sm btn-secondary" title="Limpar projetos do deck">Limpar</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- ==========================================
+       COMMAND PALETTE / SPOTLIGHT SEARCH (MOBBIN STYLE)
+       ========================================== -->
+  <div id="command-palette" class="modal-backdrop command-palette-modal" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="palette-card">
+      <div class="palette-search-bar">
+        <svg class="palette-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="palette-input" class="palette-input" placeholder="Buscar projetos, clientes, disciplinas ou seções..." autocomplete="off">
+        <kbd class="kbd-esc">ESC</kbd>
+      </div>
+
+      <div class="palette-results" id="palette-results">
+        <!-- Renderizado dinamicamente via JS -->
+      </div>
+
+      <div class="palette-footer">
+        <span class="palette-hint"><kbd>↑</kbd> <kbd>↓</kbd> para navegar</span>
+        <span class="palette-hint"><kbd>ENTER</kbd> para abrir</span>
+        <span class="palette-hint"><kbd>ESC</kbd> para fechar</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       MODAL DE DETALHES DO PROJETO COM PRÓXIMO/ANTERIOR
        ========================================== -->
   <div id="project-modal" class="modal-backdrop" aria-hidden="true" role="dialog" aria-modal="true">
     <div class="modal-card">
+      <!-- Botão Fechar -->
       <button class="modal-close-btn" id="modal-close" aria-label="Fechar janela de detalhes">✕</button>
+
+      <!-- Navegação Entre Projetos (Mobbin style) -->
+      <button class="modal-nav-btn modal-prev-btn" id="modal-prev" aria-label="Projeto anterior (Seta Esquerda)" title="Projeto Anterior (←)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"></polyline>
+        </svg>
+      </button>
+      <button class="modal-nav-btn modal-next-btn" id="modal-next" aria-label="Próximo projeto (Seta Direita)" title="Próximo Projeto (→)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"></polyline>
+        </svg>
+      </button>
+
       <div class="modal-image-wrapper">
         <img id="modal-image" src="" alt="Imagem do Projeto">
       </div>
       <div class="modal-body">
         <div class="modal-meta-row">
-          <span id="modal-category" class="project-tag"></span>
-          <span id="modal-year" class="project-year"></span>
+          <div class="modal-tags">
+            <span id="modal-category" class="project-tag"></span>
+            <span id="modal-year" class="project-year"></span>
+          </div>
+          <!-- Ações Rápidas do Modal (Mobbin & Alicia Dubuis) -->
+          <div class="modal-actions-bar">
+            <button id="modal-collect-btn" class="btn btn-sm btn-secondary modal-action-btn" title="Adicionar este projeto ao seu deck de seleção">
+              <span class="collect-symbol">+</span> Adicionar ao Deck
+            </button>
+            <button id="modal-copy-link" class="btn btn-sm btn-secondary modal-action-btn" title="Copiar link direto do case">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+              </svg>
+              <span>Copiar Link</span>
+            </button>
+          </div>
         </div>
+
         <h3 id="modal-title" class="modal-title"></h3>
         <p id="modal-description" class="modal-desc"></p>
         <div class="modal-specs">
@@ -665,10 +1064,10 @@
        TOAST DE NOTIFICAÇÃO (FEEDBACK)
        ========================================== -->
   <div id="toast" class="toast-container" role="status" aria-live="polite">
-    <div class="toast-icon">✓</div>
+    <div class="toast-icon" id="toast-icon">✓</div>
     <div class="toast-content">
-      <h5 class="toast-title">Briefing Enviado com Sucesso!</h5>
-      <p class="toast-body">Obrigado pelo contato! O Jon responderá em até 24 horas úteis.</p>
+      <h5 class="toast-title" id="toast-title">Briefing Enviado com Sucesso!</h5>
+      <p class="toast-body" id="toast-body">Obrigado pelo contato! O Jon responderá em até 24 horas úteis.</p>
     </div>
   </div>
 
